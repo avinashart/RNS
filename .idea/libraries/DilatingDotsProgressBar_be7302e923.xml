@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="DilatingDotsProgressBar-be7302e923">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.justzak/dilatingdotsprogressbar/be7302e923/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.justzak/dilatingdotsprogressbar/be7302e923/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.justzak/dilatingdotsprogressbar/be7302e923/646f241dd421035f2f2459774e2029c8b2d84317/DilatingDotsProgressBar-be7302e923-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
