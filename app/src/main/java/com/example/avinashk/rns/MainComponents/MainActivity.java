@@ -25,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.avinashk.rns.R;
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     ImageView mainPageImage;
-    CircularProgressBar circularProgressBar;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mainPageImage = (ImageView) findViewById(R.id.mainPageImage);
-        circularProgressBar = (CircularProgressBar)findViewById(R.id.progressBar);
+        progressBar = (ProgressBar)findViewById(R.id.progressBar);
         //Image ImageProcessing from Internet
         File file = new File("/data/data/com.example.avinashk.rns/app_imageDir/rns.jpg");
         if(!file.exists()){
@@ -133,17 +134,7 @@ public class MainActivity extends AppCompatActivity
                 URL url  = new URL(params[0]);
                 connection = (HttpURLConnection) url.openConnection();
                 connection.connect();
-
-                int fileLength = connection.getContentLength();
                 InputStream stream = connection.getInputStream();
-                byte data[] = new byte[4096];
-                long total = 0;
-                int count;
-                while ((count = stream.read(data)) != -1) {
-                    total += count;
-                    if (fileLength > 0)
-                        publishProgress(String.valueOf((int) (total * 100 / fileLength)));
-                }
                 Bitmap bitmap = BitmapFactory.decodeStream(stream);
                 android.provider.MediaStore.Images.Media.insertImage(getContentResolver(),bitmap,"rns.ipg",null);
                 return bitmap;
@@ -158,21 +149,15 @@ public class MainActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(Bitmap bitmap) {
             saveToInternalSorage(bitmap);
+            progressBar.setVisibility(View.GONE);
             mainPageImage.setImageBitmap(bitmap);
             super.onPostExecute(bitmap);
-            circularProgressBar.setVisibility(View.GONE);
         }
 
         @Override
         protected void onPreExecute() {
-            circularProgressBar.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
             super.onPreExecute();
-        }
-
-        @Override
-        protected void onProgressUpdate(String... values) {
-            circularProgressBar.setProgress(Integer.parseInt(values[0]));
-            super.onProgressUpdate(values);
         }
     }
 
@@ -182,7 +167,7 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }else{
-            super.onBackPressed();
+            finish();
         }
 
     }

@@ -22,18 +22,14 @@
         android:layout_alignParentStart="true"
         android:contentDescription="@string/rnsPicture" />
 
-    <com.mikhaellopez.circularprogressbar.CircularProgressBar
-        android:id="@+id/progressBar"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
+    <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminate="false"
+        android:id="@+id/progressBar"
         android:visibility="gone"
-        app:background_progressbar_color="#FFCDD2"
-        app:background_progressbar_width="5dp"
-        app:progressbar_color="#F44336"
-        app:progressbar_width="10dp" />
-
+        />
 
     <TextView
         android:layout_width="wrap_content"
